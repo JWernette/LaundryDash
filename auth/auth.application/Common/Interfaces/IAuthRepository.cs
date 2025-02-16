@@ -5,6 +5,6 @@ namespace auth.application.Common.Interfaces;
 /// </summary>
 public interface IAuthRepository
 {
-    public Task RegisterAsync(string username, string password);
+    public Task RegisterAsync(string username, string password, AccountType accountType);
     public Task LoginAsync(string username, string password);
 }

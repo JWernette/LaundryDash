@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using auth.application.Common.Interfaces;
 
 namespace auth.infrastructure.Repositories;
@@ -16,8 +17,9 @@ public class AuthRepository : IAuthRepository
         await _client.Auth.SignIn(username, password);
     }
 
-    public async Task RegisterAsync(string username, string password)
+    public async Task RegisterAsync(string username, string password, AccountType accountType)
     {
+        // need to route based on account type
         await _client.Auth.SignUp(username, password);
     }
 }
