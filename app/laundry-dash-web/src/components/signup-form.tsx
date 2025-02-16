@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,16 +17,33 @@ interface SignupProps extends React.ComponentPropsWithoutRef<'div'> {
 
 export function Signup({ accountType, className, ...props }: SignupProps) {
   const [step, setStep] = useState<'signup' | 'confirm'>('signup');
-
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formDataObject = Object.fromEntries(formData.entries());
+    // including account type into post
+    formDataObject.accountType = accountType;
+
     // Add signup logic here, e.g. call an API and send a confirmation code.
     // You can include accountType in the API payload.
+    var signupUrl = process.env.NEXT_PUBLIC_API_BASE_URL + 'auth/register';
+    
+    var register = await fetch(signupUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formDataObject)
+    })
+
+    console.log(register);
+
     setStep('confirm');
   };
 
   const handleConfirm = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(e);
     // Add confirmation logic here, e.g. verify the entered code.
   };
 
@@ -50,13 +67,14 @@ export function Signup({ accountType, className, ...props }: SignupProps) {
                     <Input
                       id="email"
                       type="email"
+                      name="email"
                       placeholder="m@example.com"
                       required
                     />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password" required />
+                    <Input id="password" name="password" type="password" required />
                   </div>
                   <Button type="submit" className="w-full">
                     Sign Up
