@@ -11,16 +11,17 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export function Signup({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+interface SignupProps extends React.ComponentPropsWithoutRef<'div'> {
+  accountType: string;
+}
+
+export function Signup({ accountType, className, ...props }: SignupProps) {
   const [step, setStep] = useState<'signup' | 'confirm'>('signup');
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     // Add signup logic here, e.g. call an API and send a confirmation code.
-    // On success, move to the confirmation step.
+    // You can include accountType in the API payload.
     setStep('confirm');
   };
 
@@ -35,7 +36,10 @@ export function Signup({
         {step === 'signup' && (
           <>
             <CardHeader className="text-center">
-              <CardTitle className="text-xl">Create an Account</CardTitle>
+              <CardTitle className="text-xl">
+                Create an Account as a{' '}
+                {accountType === 'dasher' ? 'Dasher' : 'Customer'}
+              </CardTitle>
               <CardDescription>Sign up with your email address</CardDescription>
             </CardHeader>
             <CardContent>

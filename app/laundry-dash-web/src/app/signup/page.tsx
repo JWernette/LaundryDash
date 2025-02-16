@@ -1,10 +1,23 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { GalleryVerticalEnd } from 'lucide-react';
 
 import { Signup } from '@/components/signup-form';
+import { AccountSelection } from '@/components/account-selection';
 
 export default function SignupPage() {
+  const searchParams = useSearchParams();
+  const accountTypeFromQuery = searchParams.get('accountType');
+  const [selectedType, setSelectedType] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (accountTypeFromQuery) {
+      setSelectedType(accountTypeFromQuery);
+    }
+  }, [accountTypeFromQuery]);
+
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
@@ -14,7 +27,13 @@ export default function SignupPage() {
           </div>
           LaundryDasher
         </a>
-        <Signup />
+        {!selectedType ? (
+          // Renders the account selection if no type is chosen yet.
+          <AccountSelection />
+        ) : (
+          // Renders the signup form and passes the selected account type.
+          <Signup accountType={selectedType} />
+        )}
       </div>
     </div>
   );

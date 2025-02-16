@@ -1,4 +1,3 @@
-// Import Next.js components and types
 import Link from 'next/link';
 import type { NextPage } from 'next';
 
