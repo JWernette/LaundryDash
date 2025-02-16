@@ -22,7 +22,7 @@ const Home: NextPage = () => {
         {/* Container for the sign in and sign up buttons with spacing between them */}
         <div className="flex space-x-4">
           {/* Button for signing in; routes to /signin */}
-          <Link className="btn btn-primary" href="/signin">
+          <Link className="btn btn-primary" href="/login">
             Sign In
           </Link>
           {/* Button for signing up; routes to /signup */}
