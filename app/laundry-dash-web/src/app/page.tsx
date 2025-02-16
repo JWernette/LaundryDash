@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import type { NextPage } from 'next';
 
 // Define the Home component as a functional component using TypeScript
@@ -21,11 +23,11 @@ const Home: NextPage = () => {
         {/* Container for the sign in and sign up buttons with spacing between them */}
         <div className="flex space-x-4">
           {/* Button for signing in; routes to /signin */}
-          <Link className="btn btn-primary" href="/login">
+          <Link className={buttonVariants()} href="/login">
             Sign In
           </Link>
           {/* Button for signing up; routes to /signup */}
-          <Link className="btn btn-secondary" href="/signup">
+          <Link className={buttonVariants()} href="/signup">
             Sign Up
           </Link>
         </div>
