@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using Auth.Common;
 
-namespace JobAssignments.API.Common;
+namespace auth.webapi.Common.Endpoints;
 
 public static class EndpointMapper
 {
+    // Grabs all methods with the Mapable attribute and invokes. This will create the mapping for minimal apis.
     public static void MapEndpoints(this WebApplication app, Type callingMethodType)
     {
         var callingContext = Assembly.GetExecutingAssembly();

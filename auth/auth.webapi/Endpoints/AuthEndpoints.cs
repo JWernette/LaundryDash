@@ -1,6 +1,7 @@
-using Auth.Common;
-using JobAssignments.API.Common;
-using Supabase.Interfaces;
+using auth.application.Auth.Login;
+using auth.application.Auth.Register;
+using auth.webapi.Common.Endpoints;
+using MediatR;
 
 public static class AuthEndpoints
 {
@@ -14,10 +15,9 @@ public static class AuthEndpoints
     {
         app.MapPost(
             AuthRoutes.Login,
-            async (Supabase.Client client, string email, string password) =>
+            async (ISender sender, string email, string password) =>
             {
-                // need to do something with the response
-                var response = await client.Auth.SignIn(email, password);
+                var response = await sender.Send(new LoginCommand(email, password));
                 return Results.Ok(response);
             }
         );
@@ -28,10 +28,9 @@ public static class AuthEndpoints
     {
         app.MapPost(
             AuthRoutes.Register,
-            async (Supabase.Client client, string email, string password) =>
+            async (ISender sender, string email, string password) =>
             {
-                // need to do something with the response
-                var response = await client.Auth.SignUp(email, password);
+                var response = await sender.Send(new RegisterCommand(email, password));
                 return Results.Ok(response);
             }
         );
