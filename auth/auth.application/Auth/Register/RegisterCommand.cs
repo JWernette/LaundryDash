@@ -3,7 +3,11 @@ using MediatR;
 
 namespace auth.application.Auth.Register;
 
-public record RegisterCommand(string email, string password) : IRequest<Unit>;
+public record RegisterCommand(
+    string email,
+    string password,
+    AccountType accountType = AccountType.CUSTOMER
+) : IRequest<Unit>;
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Unit>
 {
