@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,9 +26,9 @@ export function Signup({ accountType, className, ...props }: SignupProps) {
 
     // Add signup logic here, e.g. call an API and send a confirmation code.
     // You can include accountType in the API payload.
-    var signupUrl = process.env.NEXT_PUBLIC_API_BASE_URL + 'auth/register';
+    const signupUrl = process.env.NEXT_PUBLIC_API_BASE_URL + 'auth/register';
     
-    var register = await fetch(signupUrl, {
+    const register = await fetch(signupUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from "@/components/ui/button"
 import { buttonVariants } from "@/components/ui/button"
 import type { NextPage } from 'next';
 
